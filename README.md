@@ -10,3 +10,12 @@ WHERE TIMESTAMPDIFF(YEAR, u.birthday, NOW()) BETWEEN 7 AND 17
 GROUP BY u.id, b.author
 HAVING COUNT(b.author) = 2
 ```
+
+### Запуск проекта
+1. composer install 
+2. cp .env.example .env
+3. php artisan key:generate
+4. docker-compose up -d
+
+Сайт будет доступен на 8876 порту
+http://localhost:8876/api/v1
