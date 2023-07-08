@@ -11,10 +11,16 @@ class ApiTokenIsValid
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
      */
     public function handle(Request $request, Closure $next): Response
     {
-        return $next($request);
+        return $request->bearerToken() === config('api.token')
+            ? $next($request)
+            : response([
+                'status' => 'error',
+                'code' => 403,
+                'message' => 'Invalid token',
+            ], 403);
     }
 }

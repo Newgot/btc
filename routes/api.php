@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group([
-
+    'middleware' => 'api_token'
 ], function () {
     Route::get('v1', GetController::class);
     Route::post('v1', PostController::class);
