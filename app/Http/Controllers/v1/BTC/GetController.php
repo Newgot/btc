@@ -4,25 +4,14 @@ namespace App\Http\Controllers\v1\BTC;
 
 use App\Http\Controllers\Controller;
 use App\Services\BTCService;
+use Exception;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
-class GetController extends Controller
+class GetController extends BaseController
 {
-    protected ?BTCService $service = null;
-
-    public function __construct()
-    {
-        $this->service = new BTCService();
-    }
-
-    /**
-     * @param Request $request
-     * @return array
-     */
-    public function __invoke(Request $request)
-    {
-        $method = $request->get('method');
-        return $this->service->$method($request);
-    }
+    protected array $methods = ['rates'];
 }
 
